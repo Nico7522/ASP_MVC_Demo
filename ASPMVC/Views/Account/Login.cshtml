@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+<form  method="post">
+	<label for="nom">Nom</label>
+	<input type="text" name="nom"/>
+
+	<label for="prenom">Prénom</label>
+	<input type="text" name="prenom" />
+
+	<label for="mail">Mail</label>
+	<input type="email" name="mail" />
+
+	<label for="mdp">Mot de passe</label>
+	<input type="password" name="mdp" />
+
+	<button type="submit">Envoyer</button>
+
+</form>
+	@if (!ViewContext.ModelState.IsValid)
+	{
+			<span style="color:red">@ViewData["errors"]</span>
+	@foreach(KeyValuePair<string, ModelStateEntry> key in ViewContext.ModelState)
+	{
+		if(key.Value.Errors.Count() > 0)
+		{
+
+			foreach(ModelError error in key.Value.Errors)
+			{
+				<span style="color:red">@error.ErrorMessage</span>
+			}
+		}
+	}
+}
